@@ -1,0 +1,6 @@
+# Ignore csv data (too large)
+*OriginalData_csv/
+
+# Ignore compressed -tgz files from installations
+*.tgz
+
