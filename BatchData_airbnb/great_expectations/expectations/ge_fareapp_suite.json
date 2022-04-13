@@ -1,0 +1,36 @@
+{
+  "data_asset_type": null,
+  "expectation_suite_name": "ge_fareapp_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "id",
+        "mostly": 1.0
+      },
+      "meta": {
+        "notes": {
+          "content": "It is expected that id columns in all tables are **not null**.",
+          "format": "markdown"
+        }
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "id",
+        "mostly": 1.0
+      },
+      "meta": {
+        "notes": {
+          "content": "It is expected that id columns contain **unique values**.",
+          "format": "markdown"
+        }
+      }
+    }
+  ],
+  "ge_cloud_id": null,
+  "meta": {
+    "great_expectations_version": "0.15.0"
+  }
+}
