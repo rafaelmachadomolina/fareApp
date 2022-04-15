@@ -25,6 +25,11 @@ echo "pip install pyspark: " "$(date)" >> setup.log
 pip install -q findspark
 pip install pyspark
 
+echo "Downloading PostgreSQL driver..."
+wget -q wget https://jdbc.postgresql.org/download/postgresql-42.3.2.jar
+
+echo "Downloaded PostgreSQL driver: " "$(date)" >> setup.log
+
 echo "Creating env variables..."
 
 echo "Creating enviroment variables: " "$(date)" >> setup.log

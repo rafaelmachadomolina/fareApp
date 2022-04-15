@@ -1,9 +1,10 @@
-Start script at  Sun Apr  3 19:25:05 UTC 2022
-Attempting to remove existing Spark packages:  Sun Apr  3 19:25:05 UTC 2022
+Start script at  Thu Apr 14 14:35:34 UTC 2022
+Attempting to remove existing Spark packages:  Thu Apr 14 14:35:34 UTC 2022
 rm: cannot remove 'spark*': No such file or directory
-Installing Java and Spark:  Sun Apr  3 19:25:05 UTC 2022
-pip install pyspark:  Sun Apr  3 19:25:48 UTC 2022
-Creating enviroment variables:  Sun Apr  3 19:25:52 UTC 2022
-Versions:  Sun Apr  3 19:25:52 UTC 2022
+Installing Java and Spark:  Thu Apr 14 14:35:34 UTC 2022
+pip install pyspark:  Thu Apr 14 14:36:29 UTC 2022
+Downloaded PostgreSQL driver:  Thu Apr 14 14:36:35 UTC 2022
+Creating enviroment variables:  Thu Apr 14 14:36:35 UTC 2022
+Versions:  Thu Apr 14 14:36:35 UTC 2022
 Python 3.8.2
-End of script:  Sun Apr  3 19:25:52 UTC 2022
+End of script:  Thu Apr 14 14:36:35 UTC 2022
