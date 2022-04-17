@@ -34,7 +34,10 @@ SELECT T1.id AS listing_id,
 	verification_count,
 	verification_phone,
 	verification_email,
-	verification_gov_id,
+	CASE
+		WHEN verification_gov_id > 0 THEN 1
+		ELSE verification_gov_id
+	END AS verification_gov_id,
 	neighbourhood,
 	ROUND((total_nights - available_nights)*1.0 / total_nights, 3) AS ocupation
 FROM
@@ -73,7 +76,7 @@ LEFT JOIN
 ON T1.id = T2.listing_id
 LEFT JOIN
 	(SELECT listing_id,
-		instant_bookable
+		CAST(instant_bookable AS INT) AS instant_bookable
 	FROM listings.listing_complements) T3
 ON T1.id = T3.listing_id
 LEFT JOIN
@@ -84,10 +87,10 @@ LEFT JOIN
 			ELSE 0
 		END AS host_is_in_london,
 		response_time,
-		is_superhost,
+		CAST(is_superhost AS INT) AS is_superhost,
 		listings_count AS host_total_listings,
-		has_profile_pic AS host_has_profile_pic,
-		identity_verified
+		CAST(has_profile_pic AS INT) AS host_has_profile_pic,
+		CAST(identity_verified AS INT) AS identity_verified
 	FROM listings.hosts) T4
 ON T1.host_id = T4.host_id
 LEFT JOIN
