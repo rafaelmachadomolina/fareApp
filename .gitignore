@@ -19,4 +19,5 @@
 # Ignore compressed -tgz files from installations
 *.tgz
 
-Models/AWS SAM test/model.py
+# Ignore initial test to deploy SAM in AWS
+*AWS_SAM_test/
