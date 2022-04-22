@@ -20,9 +20,9 @@ with open('./pipeline.pkl', 'rb') as f:
 with open('./predictive_model.pkl', 'rb') as f:
     model = pickle.load(f)
     
-X = [[2, 1, 0.5, 0.6, 8, 1.5, 2, 10, 2, 'Private room'],
+X = [[5, 1, 0.5, 0.6, 8, 1.5, 2, 10, 2, 'Private room'],
      [2, 1, 0.5, 0.6, 8, 1.5, 2, 10, 2, 'Private room']]
     
 X_t = pipeline.transform(X)
 
-model.predict(X_t)
+y = model.predict(X_t)

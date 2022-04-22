@@ -19,3 +19,4 @@
 # Ignore compressed -tgz files from installations
 *.tgz
 
+Models/AWS SAM test/model.py
