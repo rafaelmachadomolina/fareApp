@@ -8,4 +8,21 @@ Created on Thu Apr 21 23:44:52 2022
 
 import pickle
 
-model = pickle.load('./pipeline.pickle')
+def pl_add(x):
+    return x + 0.1;
+
+def pl_add_inv(x):
+    return x - 0.1;
+
+with open('./pipeline.pkl', 'rb') as f:
+    pipeline = pickle.load(f)
+
+with open('./predictive_model.pkl', 'rb') as f:
+    model = pickle.load(f)
+    
+X = [[2, 1, 0.5, 0.6, 8, 1.5, 2, 10, 2, 'Private room'],
+     [2, 1, 0.5, 0.6, 8, 1.5, 2, 10, 2, 'Private room']]
+    
+X_t = pipeline.transform(X)
+
+model.predict(X_t)
