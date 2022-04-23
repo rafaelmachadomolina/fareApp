@@ -46,7 +46,7 @@ def get_data_SQL(conn, postcode):
     
 
 # def lambda_handler(event, context):
-def handler(event, context):
+def lambda_handler(event, context):
     
     response = {}
     
