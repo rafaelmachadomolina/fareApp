@@ -14,18 +14,18 @@ from joblib import load
 
 ### Import environ vars
 AWS_BUCKET_MODEL = os.environ['AWS_BUCKET_MODEL']
-PIPELINE_NAME = os.environ['PIPELINE_NAME']
-TEMP_FILE_PATH = '/tmp/' + PIPELINE_NAME
+MODEL_NAME = os.environ['MODEL_NAME']
+TEMP_FILE_PATH = '/tmp/' + MODEL_NAME
 
-# Tests
+### Tests
 # with open('simpleEvent.json', 'r') as f:
 #     event = json.load(f)
 
-# Functions
-def get_pipeline(TEMP_FILE_PATH):
+### Functions
+def get_model(TEMP_FILE_PATH):
     s3 = boto3.client('s3')
     print('Attempt to download file from S3')
-    s3.download_file(AWS_BUCKET_MODEL, PIPELINE_NAME, TEMP_FILE_PATH)
+    s3.download_file(AWS_BUCKET_MODEL, MODEL_NAME, TEMP_FILE_PATH)
     print('File successfully downloaded')
     
     # Read downloaded file
@@ -34,11 +34,11 @@ def get_pipeline(TEMP_FILE_PATH):
         
     return pipeline;
 
-# Execute pipeline
-def execute_pipeline(pipeline, X):
-    X_t = pipeline.transform(X)
-    X_t = [i for i in X_t[0]]
-    return X_t;
+### Execute pipeline
+def execute_model(model, X):
+    y = model.predict(X)
+    
+    return round(y[0], 2);
 
 
 def handler(event, context):
@@ -48,11 +48,11 @@ def handler(event, context):
                     "body": None}
     
     # Get data from the event
-    X = [event['record']]
+    X = [event['features']]
     
     # Load pipeline
     try:
-        pipeline = get_pipeline(TEMP_FILE_PATH)
+        model = get_model(TEMP_FILE_PATH)
         print('Pipeline imported successfully')
         
     except Exception as e:
@@ -62,7 +62,7 @@ def handler(event, context):
         
     #Execute pipeline
     try:
-        body = execute_pipeline(pipeline, X)
+        body = execute_model(model, X)
         print('Pipeline correctly executed')
         
     except ValueError as e:
@@ -76,9 +76,7 @@ def handler(event, context):
         
     # Send transformed data in the response
     try:
-        if(len(body) != 12): # Checks that the output has the corret length
-            raise Exception('Wrong length of response')
-
+        
         response_good = {"statusCode": 200,
                         "body": body}
         

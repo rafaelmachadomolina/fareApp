@@ -28,6 +28,14 @@ deactivate () {
     fi
 
     unset VIRTUAL_ENV
+    unset AWS_BUCKET_MODEL
+    unset PIPELINE_NAME
+    unset MODEL_NAME
+    unset API_PROX_SCORE
+    unset API_PREPROCESS
+    unset API_PREDICT
+    unset API_INSERT_DB
+
     if [ ! "${1:-}" = "nondestructive" ] ; then
     # Self destruct!
         unset -f deactivate
@@ -43,6 +51,15 @@ export VIRTUAL_ENV
 _OLD_VIRTUAL_PATH="$PATH"
 PATH="$VIRTUAL_ENV/bin:$PATH"
 export PATH
+
+# Set environmental variables
+export AWS_BUCKET_MODEL="ucl-dataengineering-2022-fareapp-production"
+export PIPELINE_NAME="pipeline.joblib"
+export MODEL_NAME="predictive_model.joblib"
+export API_PROX_SCORE="https://356oo9k639.execute-api.eu-west-2.amazonaws.com/production"
+export API_PREPROCESS="https://rx5dpm737h.execute-api.eu-west-2.amazonaws.com/production"
+export API_PREDICT="https://dqjopus0xh.execute-api.eu-west-2.amazonaws.com/production"
+export API_INSERT_DB="https://qx6tugvjd4.execute-api.eu-west-2.amazonaws.com/production"
 
 # unset PYTHONHOME if set
 # this will fail if PYTHONHOME is set to the empty string (which is bad anyway)

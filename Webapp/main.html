@@ -4,23 +4,8 @@
     <meta charset="UTF-8">
     <title>Hello World</title>
     <!-- Add some CSS to change client UI -->
-    <style>
-    body {
-        background-color: #232F3E;
-        }
-    label, button {
-        color: #FF9900;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 20px;
-        margin-left: 40px;
-        }
-     input {
-        color: #232F3E;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 20px;
-        margin-left: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+
     <script>
         // define the callAPI function that takes a first name and last name as parameters
         var callAPI = (firstName,lastName)=>{
@@ -47,39 +32,51 @@
 </head>
 <header>
   <title>FareApp</title>
-  <h1>FareApp - Your Airbnb fare estimator in London</h1>
+  <h1 align="center">FareApp - Your Airbnb fare estimator in London</h1>
+  <p align="center" style="margin: 0% 20% 0% 20%">This app lets you estimate how
+    much should you charge per night as an Airbnb host. The model is trained with
+    historical data from the company and the city.</p>
 </header>
 <body>
-  <h2>Tell us about your place</h2>
-    <form>
-      <h3>Your property</h3>
-        <label>How many available bedrooms?</label>
-        <input type="text" id="bedrooms">
-        <label>How many bathrooms? (Half bathroom is equivalent to social bathroom)</label>
-        <input type="text" id="bathroom_number">
-        <label>Select the type of room (or rooms)</label>
-        <input type="text" id="room_type">
-        <label>Where is your property? Please give us the postcode</label>
-        <input type="text" id="postcode">
-        <label>Give us an estimate of the amount of amenities such as Wifi, heater, towels, etc.</label>
-        <input type="text" id="amenities">
+  <div class="row">
+    <div class="column"><h1>Left</h1></div>
+      <img src="images/left_pane.png" alt="London phone booth">
+    <div class="column">Middle</div>
+      <h2>Tell us about your place</h2>
+      <form>
+        <h3>Your property</h3>
+          <label>How many available bedrooms?</label>
+          <input type="text" id="bedrooms">
+          <label>How many bathrooms? (Half bathroom is equivalent to social bathroom)</label>
+          <input type="text" id="bathroom_number">
+          <label>Select the type of room (or rooms)</label>
+          <input type="text" id="room_type">
+          <label>Where is your property? Please give us the postcode</label>
+          <input type="text" id="postcode">
+          <label>Give us an estimate of the amount of amenities such as Wifi, heater, towels, etc.</label>
+          <input type="text" id="total_amenities">
 
-      <h3>Your rules</h3>
-        <label>How many guests are allowed?</label>
-        <input type="text" id="accommodates">
-        <label>Which is the minimum number of nights per guest stay?</label>
-        <input type="text" id="minimum_nights">
+        <h3>Your rules</h3>
+          <label>How many guests are allowed?</label>
+          <input type="text" id="accommodates">
+          <label>Which is the minimum number of nights per guest stay?</label>
+          <input type="text" id="min_nights">
 
-      <h3>About yourself</h3>
-        <label>On average, how many nights do you expect to rent this property per year?</label>
-        <input type="text" id="ocupation">
-        <label>How long have you been a host in Airbnb?</label>
-        <input type="text" id="seniority">
-        <label>How many additional properties have you registered in Airbnb?</label>
-        <input type="text" id="host_total_listings">
+        <h3>About yourself</h3>
+          <label>What is your name?</label>
+          <input type="text" id="customer_name">
+          <label>On average, how many nights do you expect to rent this property per year?</label>
+          <input type="text" id="ocupation_days">
+          <label>How long have you been a host in Airbnb?</label>
+          <input type="text" id="seniority">
+          <label>How many additional properties have you registered in Airbnb?</label>
+          <input type="text" id="host_total_listings">
 
-        <!-- set button onClick method to call function we defined passing input values as parameters -->
-        <button type="button" onclick="callAPI(document.getElementById('fName').value,document.getElementById('lName').value)">Estimate price per night</button>
-    </form>
+          <!-- set button onClick method to call function we defined passing input values as parameters -->
+          <button type="button" onclick="callAPI(document.getElementById('fName').value,document.getElementById('lName').value)">Estimate price per night</button>
+      </form>
+    <div class="column"><h1>Right</h1></div>
+</div>
+
 </body>
 </html>
