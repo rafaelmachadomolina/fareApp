@@ -1,34 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Hello World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <title>FareApp</title>
     <!-- Add some CSS to change client UI -->
     <link rel="stylesheet" href="style.css">
 
-    <script>
-        // define the callAPI function that takes a first name and last name as parameters
-        var callAPI = (firstName,lastName)=>{
-            // instantiate a headers object
-            var myHeaders = new Headers();
-            // add content type header to object
-            myHeaders.append("Content-Type", "application/json");
-            // using built in JSON utility package turn object to string and store in a variable
-            var raw = JSON.stringify({"firstName":firstName,"lastName":lastName});
-            // create a JSON object with parameters for API call and store in a variable
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-            // make API call with parameters and use promises to get response
-            fetch("https://w3frosoyca.execute-api.eu-west-2.amazonaws.com/dev", requestOptions)
-            .then(response => response.text())
-            .then(result => alert(JSON.parse(result).body))
-            .catch(error => console.log('error', error));
-        }
-    </script>
+    <script type="text/javascript" src="methods.js"></script>
+
 </head>
 <header>
   <title>FareApp</title>
@@ -36,46 +15,83 @@
   <p align="center" style="margin: 0% 20% 0% 20%">This app lets you estimate how
     much should you charge per night as an Airbnb host. The model is trained with
     historical data from the company and the city.</p>
+    <br>
 </header>
 <body>
   <div class="row">
-    <div class="column"><h1>Left</h1></div>
+    <div class="col-1">
+      <!-- <h1>Left</h1> -->
       <img src="images/left_pane.png" alt="London phone booth">
-    <div class="column">Middle</div>
-      <h2>Tell us about your place</h2>
-      <form>
+    </div>
+    <div class="col-2">
+      <!-- <h1>Middle</h1> -->
+      <h2 align="center">Tell us about your place</h2>
+      <form id="form_all_fields">
+
         <h3>Your property</h3>
           <label>How many available bedrooms?</label>
-          <input type="text" id="bedrooms">
+          <input type="number" id="bedrooms" step=1 min=0 onkeypress="return /[0-9]/i.test(event.key)">
+          <br>
           <label>How many bathrooms? (Half bathroom is equivalent to social bathroom)</label>
-          <input type="text" id="bathroom_number">
-          <label>Select the type of room (or rooms)</label>
-          <input type="text" id="room_type">
+          <input type="number" id="bathroom_number" step=0.5 min=0 onkeypress="return /[0-9]/i.test(event.key)">
+          <br>
+          <label>Select the type of room (or rooms) &emsp;</label>
+            <input type="radio" id="room_type_entire_home" name="room_type" value="Entire home/apt">
+            <label>Entire home</label>
+            <input type="radio" id="room_type_hotel_room" name="room_type" value="Hotel room">
+            <label>Hotel room</label>
+            <input type="radio" id="room_type_private_room" name="room_type" value="Private room">
+            <label>Private room</label>
+            <input type="radio" id="room_type_shared_room" name="room_type" value="Shared room">
+            <label>Shared room</label>
+          <br>
           <label>Where is your property? Please give us the postcode</label>
-          <input type="text" id="postcode">
+          <input type="text" id="postcode" maxlength="10" size="10">
+          <br>
           <label>Give us an estimate of the amount of amenities such as Wifi, heater, towels, etc.</label>
-          <input type="text" id="total_amenities">
+          <input type="number" id="total_amenities" step=1 min=0 onkeypress="return /[0-9]/i.test(event.key)">
 
         <h3>Your rules</h3>
           <label>How many guests are allowed?</label>
-          <input type="text" id="accommodates">
+          <input type="number" id="accommodates" step=1 min=1 onkeypress="return /[0-9]/i.test(event.key)">
+          <br>
           <label>Which is the minimum number of nights per guest stay?</label>
-          <input type="text" id="min_nights">
+          <input type="number" id="min_nights" step=1 min=1 onkeypress="return /[0-9]/i.test(event.key)">
 
         <h3>About yourself</h3>
           <label>What is your name?</label>
-          <input type="text" id="customer_name">
+          <input type="text" id="customer_name" maxlength="40" size="40">
+          <br>
           <label>On average, how many nights do you expect to rent this property per year?</label>
-          <input type="text" id="ocupation_days">
-          <label>How long have you been a host in Airbnb?</label>
-          <input type="text" id="seniority">
+          <input type="number" id="ocupation_days" step=1 min=1 onkeypress="return /[0-9]/i.test(event.key)">
+          <br>
+          <label>How many years have you been a host in Airbnb?</label>
+          <input type="number" id="seniority" step=1 min=0 onkeypress="return /[0-9]/i.test(event.key)">
+          <br>
           <label>How many additional properties have you registered in Airbnb?</label>
-          <input type="text" id="host_total_listings">
+          <input type="number" id="host_total_listings" step=1 min=0 onkeypress="return /[0-9]/i.test(event.key)">
+          <br><br>
 
           <!-- set button onClick method to call function we defined passing input values as parameters -->
-          <button type="button" onclick="callAPI(document.getElementById('fName').value,document.getElementById('lName').value)">Estimate price per night</button>
+          <div align="center">
+            <button type="button" onclick="callAPI()" id="button_estimate">
+              Estimate price per night
+            </button>
+          </div>
       </form>
-    <div class="column"><h1>Right</h1></div>
+    </div>
+
+    <div class="col-1">
+      <h2 align="Center">Your estimated fare per night</h2>
+      <div align="center">
+        <form id="form_result">
+          <input type="text" id="fare_per_night" disabled value="£0.00" style="text-align:center;" maxlength="10" size="10">
+          <br>
+          <br>
+          <button type="button" onclick="resetValues()" id="button_reset">Reset</button>
+        </form>
+      </div>
+    </div>
 </div>
 
 </body>

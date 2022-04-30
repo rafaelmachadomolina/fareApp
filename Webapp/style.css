@@ -1,27 +1,57 @@
+* {
+    box-sizing: border-box;
+
+  }
+
 body {
     background-color: #f2f8ff;
     }
 label, button {
-    color: #FF9900;
+    color: #000000;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
-    margin-left: 40px;
+    /* margin-left: 40px; */
     }
  input {
     color: #232F3E;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
-    margin-left: 20px;
+
+    /* margin-left: 20px; */
     }
 
-.column {
+input[type='number']{
+    width: 50px;
+    }
+
+img {
+    width: 75%;
+    /* height: 5%; */
+    }
+
+button {
+    color: #B87333;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    }
+
+[class*="col-"] {
   float: left;
+  padding: 15px;
+  
 }
 
-.left, .right {
-  width: 25%;
+.col-1 {width: 25%;}
+.col-2 {width: 50%;}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
-.middle {
-  width: 50%;
+#fare_per_night
+{
+    font-size: 24px;
+    size: 10;
 }
